@@ -8,7 +8,6 @@ class View
 {
     
     private $file;
-
    
     private $title;
 
@@ -30,7 +29,7 @@ class View
         $racineWeb = \App\Framework\Configuration::get("racineWeb", "/");
      
         $view = $this->generateFile('../View/template.php',
-                array('titre' => $this->title, 'contenu' => $content, 'racineWeb' => $racineWeb));
+                array('title' => $this->title, 'content' => $content, 'racineWeb' => $racineWeb));
         
         echo $view;
     }
