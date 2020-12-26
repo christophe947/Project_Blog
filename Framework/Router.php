@@ -4,6 +4,7 @@ namespace App\Framework;
 
 use App\Framework\Request;
 use App\Framework\View;
+use \Exception;
 
 
 class Router
@@ -20,14 +21,14 @@ class Router
 
             $controller->executeAction($action);
         }
-        catch (Exception $e) {
+        catch (\Exception $e) {
             $this->manageError($e);
         }
     }
 
     private function createController(Request $request)
     {
-        $controller = "Home";  
+        $controller = "Home";
         if ($request->existSetting('controller')) {
             $controller = $request->getSetting('controller');
             
@@ -37,10 +38,7 @@ class Router
         $classeController = 'App\Controller\\'.$controller;
         $fileController = "../Controller/" . $controller . ".php";
         
-        
-        
         if (file_exists($fileController)) {
-            
             
             $controller = new $classeController();
             $controller->setRequest($request);
@@ -48,20 +46,34 @@ class Router
         }
         else {
             
-            throw new \Exception("Fichier '$fileController' introuvable");
+            $controller = "Home";
+                
+                $classeController = 'App\Controller\\'.$controller;
+                $fileController = "../Controller/" . $controller . ".php";
+                $controller = new $classeController();
+                $controller->setRequest($request);
+                return $controller;     
         }
     }
 
     private function createAction(Request $request)
     {
         $action = "index";  
+        
         if ($request->existSetting('action')) {
             $action = $request->getSetting('action');
+            $controller = $request->getSetting('controller');
+            $fileAction = "../View/" . $controller . "/". $action .".php";
+        
+        if (!file_exists($fileAction)) {
+$action = 'index';
+        }  
         }
+        
         return $action;
     }
 
-    private function manageError(Exception $exception)
+    private function manageError(\Exception $exception)
     {
         $view = new \App\Framework\View('error');
         $view->generate(array('msgErreur' => $exception->getMessage()));

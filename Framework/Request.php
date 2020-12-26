@@ -4,21 +4,21 @@ namespace App\Framework;
 
 class Request {
 
-  private $setttings;
+    private $setttings;
 
-  public function __construct($settings) {
-    $this->settings = $settings;
-  }
-
-  public function existSetting($name) {
-    return (isset($this->settings[$name]) && $this->settings[$name] != "");
-  }
-  
-  public function getSetting($name) {
-    if ($this->existSetting($name)) {
-      return $this->settings[$name];
+    public function __construct($settings) {
+        $this->settings = $settings;
     }
-    else
-      throw new Exception("Paramètre '$name' absent de la requête");
-  }
+
+    public function existSetting($name) {
+        return (isset($this->settings[$name]) && $this->settings[$name] != "");
+    }
+  
+    public function getSetting($name) {
+        if ($this->existSetting($name)) {
+            return $this->settings[$name];
+        }
+        else
+            throw new Exception("Paramètre '$name' absent de la requête");
+      }
 }

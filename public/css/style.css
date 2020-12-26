@@ -1,0 +1,180 @@
+
+/*ajustement bootstrap*/
+
+/*navbar*/
+.nav-link {
+    color: white !important;
+    font-weight: lighter !important;
+
+}
+
+.nav-link:hover {
+color:aquamarine !important;
+}
+
+.nav-link:active {
+    color:rgba(127, 255, 212, 0.75) !important;
+}
+
+.navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.35) !important;
+    border: 1px solid  rgba(255, 255, 255, 0.25) !important;
+    transition-duration: 0.5s;
+}
+
+.navbar-toggler:hover {
+    background-color: rgba(255, 255, 255, 0.55) !important;
+    border: 1px solid  rgba(255, 255, 255, 0.45) !important;
+    transition-duration: 1s;
+}
+
+/*carroussel*/
+#carouselExampleFade {
+	margin-bottom: 4em;
+	height: 30em;
+	position: relative;
+	overflow: hidden;
+opacity: 0.65;
+box-shadow: 0px 7px 25px 0px rgba(110,110,110,1);
+}
+
+
+/*titre h1 de page dacceuil*/
+#bienvenue {
+    width: 40%; 
+    background-color: aquamarine;
+    /*border: 1px solid black;*/
+    font-size: 2em;
+    word-wrap: break-word;
+    font-weight: normal;
+    margin: auto;
+      text-align: center;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    
+}
+
+h1, h2, h3 {
+    margin-bottom: 1em !important;
+}
+
+ footer {
+     
+   bottom: 0px;
+    color: white;
+    padding: 1em;
+    margin-top: 5em;
+   position: absolute;
+   
+   /*bottom: -50em;*/
+   width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+   
+ }
+/*
+ #block {
+position: absolute;
+min-height: 100%;
+width: 100%;
+border: 2px solid red;
+
+ }*/
+
+ body{
+    /* border: 3px solid green;*/
+     min-height: 100%;
+     width: 100%;
+     position: absolute;
+     padding-bottom: 17em;
+ }
+/*boutton d'inscription/connection*/
+ .btnvert {
+    box-shadow: 0px 5px 25px 0px rgba(110,110,110,0.0) !important;
+     background-color: rgba(127,255,212,0.65) !important;
+     color: black !important;
+ }
+
+ .btnvert:hover {
+     transition-duration: 0.5s !important;
+    box-shadow: 0px 5px 25px 0px rgba(110,110,110,0.25) !important;
+    background-color: rgba(127,255,212,1) !important;
+    font-weight: bold !important;
+}
+
+.btnvert:active {
+    color: white !important;
+    
+}
+
+/*class dicon aquamarine*/
+.icon {
+     color : aquamarine !important;
+ }
+
+.aqua {
+     background-color: aquamarine !important;
+     padding: 0.5em;
+     border-radius: 5px;
+     
+ }
+
+.art {
+     /*border: 1px solid black;*/ 
+     /*background-color: rgba(0,0,0,0.02);
+     box-shadow: 0px 5px 25px 0px rgba(110,110,110,0.2);*/
+     border-radius: 5px;
+     padding: 1.5em !important;
+    
+     text-align: center !important;
+ }
+ 
+.artmini {
+    transition-duration: 0.5s;
+height: 15em;
+
+word-wrap: break-word !important;
+
+overflow: hidden;
+padding-top: 2em;
+margin-bottom: 2em;
+}
+
+.artmini:hover {
+    transition-duration: 0.5s;
+    background-color: rgba(0,0,0,0.02);
+     box-shadow: 0px 5px 25px 0px rgba(110,110,110,0.2);
+     cursor: pointer;
+     transform: scale(1.005);
+}
+
+
+/*
+#contactForm {
+    display: flex;
+    flex-direction: column;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ .center {
+     border: 2px solid red; 
+ }*/
+ @media screen and (max-width: 768px) {
+ 
+     body {
+         padding-bottom: 32em !important;
+     }
+  }

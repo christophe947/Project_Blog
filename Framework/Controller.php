@@ -7,10 +7,8 @@ use App\Framework\Request;
  
 abstract class Controller
 {
-   
     private $action;
 
-    
     protected $request;
 
     public function setRequest(Request $request)
@@ -34,9 +32,6 @@ abstract class Controller
 
     protected function generateView($dataView = array(), $action = null)
     {
-
-
-
         $actionView = $this->action;
         if ($action != null) {
             $actionView = $action;
@@ -45,8 +40,6 @@ abstract class Controller
         $controllerNamespace = substr($classeController, 0, strrpos($classeController, '\\'));
         $controllerView = substr(str_replace($controllerNamespace, "", $classeController), 1);
 
-        
-        
         $view = new View($actionView, $controllerView);
         $view->generate($dataView);
     }
@@ -57,5 +50,4 @@ abstract class Controller
         
         header("Location:" . $racineWeb . $controller . "/" . $action);
     }
-
 }
