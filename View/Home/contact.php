@@ -1,19 +1,21 @@
 <?php $this->title = "Contact"; ?>
 
-<div class="scrool container">
+<div id="contactZone" class="scrool container">
 
-    <h1 id="bienvenue">Contact</h1>
+    <h1 id="greenTitle">Contact</h1>
 
     <div class="text-center">
         <h3>Pour me Contacter :</h3>
-
+        <hr>
+        <br />
         <p><strong>Christophe Ecrivains SAS</strong><br />
 
         25 rue d'Hauteville 75010 Paris<br />
 
         Tel: 01 02 03 04 05 <br/>
         </br>
-    
+        <hr>
+        <br />
         <em>Ou en utilisant le formulaore ci-dessous :</em></p>
     </div>
     <!--<div class="row">
@@ -51,61 +53,6 @@
         <button type="submit" class="btnvert btn btn-info btn-block mb-4">Envoyer le message</button>
     </form>
 
-</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <!--FORMULAIRE -->
-
-
-            <!--<div id="contactForm">  
-                <form method="post" action="traitement.php">
-                    <fieldset id="formulaire">
-                        <h3>Pour me Contacter :</h3>
-
-                        <p><strong>Christophe Ecrivains SAS</strong><br />
-
-                        25 rue d'Hauteville 75010 Paris<br />
-
-                        Tel: 01 02 03 04 05</p>
-
-                        <input type="text" name="Name" id="Name" maxlength="10" placeholder="Nom" required />
-                        <label for="Name"></label>
-
-                        <input type="email" name="Mail" placeholder="E-mail" required />
- 
-                        <input type="text" name="Sujet" placeholder="Objet" />
-
-                        <textarea name="precisions" placeholder="Ecrivez votre message" cols="30" rows="5"></textarea>
-
-                        <input type="submit" value="Envoyer Message" />
-                    </fieldset>
-                </form>
-            </div>-->
-
-
-
-
-
-
-
-        <!--</div>
-    </div>-->
-
+    
 </div>

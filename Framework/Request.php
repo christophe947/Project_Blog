@@ -2,6 +2,7 @@
 
 namespace App\Framework;
 
+
 class Request {
 
     private $setttings;
@@ -19,6 +20,7 @@ class Request {
             return $this->settings[$name];
         }
         else
-            throw new Exception("Paramètre '$name' absent de la requête");
+            return false;
+            throw new \Exception("Paramètre '$name' absent de la requête");
       }
 }

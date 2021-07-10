@@ -4,9 +4,9 @@ namespace App\Framework;
 
 use App\Configuration;
 
+
 class View
 {
-    
     private $file;
    
     private $title;
@@ -34,6 +34,19 @@ class View
         echo $view;
     }
 
+    public function generateAdmin($data)
+    {
+       
+        $content = $this->generateFile($this->file, $data);
+        
+        $racineWeb = \App\Framework\Configuration::get("racineWeb", "/");
+     
+        $view = $this->generateFile('../View/templateAdmin.php',   
+                array('title' => $this->title, 'content' => $content, 'racineWeb' => $racineWeb));
+        
+        echo $view;
+    }
+    
     private function generateFile($file, $data)
     {
         if (file_exists($file)) {
@@ -54,7 +67,6 @@ class View
     private function clean($value)
     {
         
-        return htmlspecialchars($valeur, ENT_QUOTES, 'UTF-8', false);
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
     }
-
 }

@@ -1,19 +1,33 @@
 <?php
+
 namespace App\Framework;
 
 use App\Framework\Configuration;
-
 use App\Framework\Request;
- 
+//require '../vendor/autoload.php';
+
 abstract class Controller
 {
     private $action;
 
     protected $request;
 
+    private $session;
+
+    public function __construct() {
+        $this->session = $_SESSION;
+    }
+
+    // créer les méthodes get set 
+
     public function setRequest(Request $request)
     {
         $this->request = $request;
+    }
+
+    public function getRequest()
+    {
+        return $this->request;
     }
 
     public function executeAction($action)
@@ -30,7 +44,7 @@ abstract class Controller
 
     public abstract function index();
 
-    protected function generateView($dataView = array(), $action = null)
+    protected function generateView($dataView = array(), $action = null, $admin = null)
     {
         $actionView = $this->action;
         if ($action != null) {
@@ -41,7 +55,12 @@ abstract class Controller
         $controllerView = substr(str_replace($controllerNamespace, "", $classeController), 1);
 
         $view = new View($actionView, $controllerView);
-        $view->generate($dataView);
+        //gestion de la conditoin pour faire uneautre  $view->generateBIS($dataView);
+        if(!empty($_SESSION['auth']['role']) == 30) {
+            $view->generateAdmin($dataView);   
+        } else {
+            $view->generate($dataView);
+        }
     }
 
     protected function redirect($controller, $action = null)

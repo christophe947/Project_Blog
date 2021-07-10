@@ -1,10 +1,30 @@
 <?php $this->title = "Accueil"; ?>
 
-<div class="container-fluid">
 
-    <h1 id="bienvenue">Bienvenue sur l'accueil de mon nouveau blog</h1>
+<div id="flashMessage" class="container-fluid no-gutter">
+  
+    <?php if (!empty($_SESSION['message'])) : ?>
+            <p class="<?= $_SESSION['message']['class']; ?>"><?= $_SESSION['message']['content'] ?></p>
+        <?php
+            unset($_SESSION['message']);
+            endif;
+        ?>
 
-    <div class="row">
+</div>
+
+<div id="acceuilZone" class="container-fluid">
+
+    <h1 id="greenTitle">Bienvenue sur l'accueil de mon nouveau blog</h1>
+
+        
+    
+        
+        
+        
+
+    <div  class="row rowBis">
+
+    
         <div class="art lead offset-sm-0 col-sm-12 offset-md-1 col-md-10 offset-lg-2 col-lg-8">
             <h1>Mon Blog</h1>
             <p>

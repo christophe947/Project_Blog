@@ -9,7 +9,6 @@ use \Exception;
 
 class Router
 {
-
     public function routerRequest()
     {
         try {
@@ -65,9 +64,9 @@ class Router
             $controller = $request->getSetting('controller');
             $fileAction = "../View/" . $controller . "/". $action .".php";
         
-        if (!file_exists($fileAction)) {
-$action = 'index';
-        }  
+            if (!file_exists($fileAction)) {
+                $action = 'index';
+            }  
         }
         
         return $action;
@@ -78,5 +77,4 @@ $action = 'index';
         $view = new \App\Framework\View('error');
         $view->generate(array('msgErreur' => $exception->getMessage()));
     }
-
 }

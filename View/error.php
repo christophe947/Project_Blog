@@ -1,3 +1,3 @@
-<?php $this->titre = "Mon Blog - Erreur !"; ?>
+<?php $this->title = "Mon Blog - Erreur !"; ?>
 
 <p><?= $msgErreur ?></p>

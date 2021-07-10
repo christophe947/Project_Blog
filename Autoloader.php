@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+//use Framework\Configuration;
 
 class Autoloader{
 

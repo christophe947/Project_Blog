@@ -19,7 +19,7 @@
     <body>
     <!--<div id="block">-->
         <header>
-            <nav class="navbar navbar-expand-lg navbar-light lead fixed-top" style="background-color: rgba(0, 0, 0, 0.75);"> 
+            <nav class="navbar navbar-expand-lg navbar-light lead fixed-top"> 
         
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 	aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -27,18 +27,43 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <ul class="navbar-nav mr-auto" style="margin: auto;">
+                    <ul class="navbar-nav mr-auto " style="margin: auto;">
                         <li class="nav-item">
-                            <a class="nav-link" href="home/index/">Accueil <span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" id="acceuilMenu" href="home/index/">Accueil <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="home/article/">Articles <span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" id="articleMenu" href="home/article/">Articles <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                        <?php
+                        if(empty($_SESSION['auth']) ){ ?>
+                          <a class="nav-link text-white dropdown-toggle" id="monEspaceMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Mon Espace <span class="sr-only">(current)</span></a>
+                          <div class="dropdown-menu bg-light " aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item <?= !empty($_SESSION['auth']) ? 'disabled' : '' ?>" href="home/register/">Inscription</a>
+                                <a class="dropdown-item <?= !empty($_SESSION['auth']) ? 'disabled' : '' ?>" href="home/connect/">Connection</a>
+                                   
+                            </div>
+                          
+                          <?php
+                        
+                        
+                        
+                        } else if ($_SESSION['auth']['role'] == 20 ) { ?>
+                          <a class="nav-link text-white" id="monEspaceMenuBis" href="  home/personnalSpace/ " >Mon Espace <span class="sr-only">(current)</span></a> <?php
+                        }  else if ($_SESSION['auth']['role'] == 30) { ?> <a class="nav-link text-white dropdown-toggle" id="op" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Administrateur <span class="sr-only">(current)</span></a> 
+                        
+                          <div class="dropdown-menu bg-light " aria-labelledby="navbarDropdown"  id="op">
+                                  <a class="dropdown-item " href="admin/redactArticle/">Rediger un article</a>
+                                  <a class="dropdown-item " href="admin/personnalSpaceAdmin/">Espace Administrateur</a>
+    
+                              </div>
+                              <?php } ?>
+ 
+                            
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="home/connect/">Connexion <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="home/contact/">Contact <span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" id="contactMenu" href="home/contact/">Contact <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
 
@@ -47,7 +72,7 @@
         </header>
 
     
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false" style="">
+        <div id="carouselExampleFade" class="carousel slide carousel-fade <?php if (empty($_SESSION['auth'] )) { ?> carouselHeightHome <?php } else if(!empty($_SESSION['auth'])) { if($_SESSION['auth']['role'] == 20) { ?> carouselHeightHome <?php } else if ($_SESSION['auth']['role'] == 30) { ?> carouselHeightAdmin <?php } } ?> " data-ride="carousel" data-pause="false">
             <div class="carousel-inner">
                <div class="carousel-item active">
                     <img class="d-block w-100" src="https://wallsdesk.com/wp-content/uploads/2016/11/Cinque-Terre-Computer-Backgrounds.jpg" alt="First slide">
@@ -69,11 +94,8 @@
       
       
         <?= $content ?>
-      
-
-    
-
-
+        
+       
 
 
     <footer class="page-footer font-small pt-4">
@@ -88,8 +110,8 @@
       <div class="col-md-6 mt-md-0 mt-3">
 
         <!-- Content -->
-        <h5 class="text-uppercase">Footer Content</h5>
-        <p>Here you can use rows and columns to organize your footer content.</p>
+        <h5 class="text-uppercase">Acces rapide</h5>
+        <p>Profiter des raccourcis d'acces rapide.</p>
 
       </div>
       <!-- Grid column -->
@@ -100,20 +122,20 @@
       <div class="col-md-3 mb-md-0 mb-3">
 
         <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
+        <h5 class="text-uppercase">Menu</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
+            <a href="home/index/">- Acceuil</a>
           </li>
           <li>
-            <a href="#!">Link 2</a>
+            <a href="home/article/">- Article</a>
           </li>
           <li>
-            <a href="#!">Link 3</a>
+            <a href="home/connect/">- Mon Espace</a>
           </li>
           <li>
-            <a href="#!">Link 4</a>
+            <a href="home/contact/">- Contact</a>
           </li>
         </ul>
 
@@ -124,7 +146,7 @@
       <div class="col-md-3 mb-md-0 mb-3">
 
         <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
+        <h5 class="text-uppercase">Liens</h5>
 
         <ul class="list-unstyled">
           <li>
@@ -157,6 +179,18 @@
    Copyright -->
 
 </footer>
+
+
+    <script> 
+        var sessionAuth = "<?php
+            if(!empty($_SESSION['auth'])) {
+                echo $_SESSION['auth'];
+            } else {
+                //$_SESSION['pseudo'] = '';
+                echo 'vide';
+            }; 
+        ?>";
+    </script>
     <!--<div>-->
 
     

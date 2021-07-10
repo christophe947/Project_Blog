@@ -1,8 +1,8 @@
 <?php $this->title = "Article"; ?>
 
-<div class="container-fluid">
+<div id="articleZone" class="container-fluid">
 
-    <h1 id="bienvenue">Bienvenue sur la futur page d'articles</h1>
+    <h1 id="greenTitle">Bienvenue sur la futur page d'articles</h1>
 
     <div class="row">
         <div class="artmini art lead  offset-sm-0 col-sm-12 offset-md-1 col-md-10 offset-lg-2 col-lg-8">

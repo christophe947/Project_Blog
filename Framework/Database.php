@@ -2,8 +2,15 @@
 
 namespace App\Framework;
 
-abstract class Model
+use App\Framework\Configuration;
+use PDO;
+
+
+abstract class Database
+
 {
+    private static $bdd;
+    
     protected function executeRequest($sql, $params = null)
     {
         if ($params == null) {
