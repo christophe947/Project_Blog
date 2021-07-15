@@ -23,6 +23,8 @@ class UserValidator extends Validator {
         return true;
     }
 
+
+
     public function validateRegister($user) {
 
         $pseudo = $user->getPseudo();
@@ -40,8 +42,42 @@ class UserValidator extends Validator {
         return false;
     }
 
+    public function updateRegister($user) {
 
-    public function validatePseudo($value, $value1, $value2 = null) {                       //PSEUDO
+        $pseudo = $user->getPseudo();
+        $email = $user->getEmail();
+        $pass = $user->getPass();
+        $pass2 = $user->getPass2();
+
+        $this->validatePseudo($pseudo, self::PSEUDO_LENGTH, null, $_SESSION['auth']['pseudo']);
+        $this->validateEmail($email, self::EMAIL_LENGTH, null,  $_SESSION['auth']['email']);
+        $this->validatePass($pass, self::PASS_LENGTH, $pass2);
+        var_dump($_SESSION['auth']['pseudo']);
+        if ($this->error == 0) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public function validateConnecting($user) {
+
+        $email = $user->getEmail();
+        $pass = $user->getPass();
+
+        $this->validateEmail($email, self::EMAIL_LENGTH);
+        $this->validatePass($pass, self::PASS_LENGTH);
+        
+        if ($this->error == 0) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public function validatePseudo($value, $value1, $value2 = null, $value3 = null) {                       //PSEUDO
         if ($this->validateIsNotEmpty($value)){
             $this->error++;
             $this->msgErrorValidator['pseudo'] = "* pseudo requis";
@@ -56,12 +92,17 @@ class UserValidator extends Validator {
                 $this->msgErrorValidator['pseudo'] = "* le pseudo deja utiliser";
             }
         } 
-        
+        if ($value3 != null) {
+            if($this->existingPseudoEmailUpdate($value, $value3)){
+                $this->error++;
+                $this->msgErrorValidator['pseudo'] = "* le pseudo nouveau deja utiliser";
+            }
+        } 
     }
 
 
 
-    public function validateEmail($value, $value1, $value2 = null) {                //EMAIL
+    public function validateEmail($value, $value1, $value2 = null, $value3 = null) {                //EMAIL
        
         if ($this->validateIsNotEmpty($value)){
             $this->error++;
@@ -77,7 +118,12 @@ class UserValidator extends Validator {
                 $this->msgErrorValidator['email'] = "* le email deja utiliser";
             }
         }
-        
+        if ($value3 != null) {
+            if($this->existingPseudoEmailUpdate($value, $value3)){
+                $this->error++;
+                $this->msgErrorValidator['email'] = "* le email nouveau deja utiliser";
+            }
+        } 
     }
 
 

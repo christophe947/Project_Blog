@@ -24,6 +24,59 @@ class Home extends Controller {
         $this->generateView();
     }
 
+    public function connect() {
+
+        $errors = 0;
+        $msgErrorValidator = 0;
+        
+        if ($this->getRequest()->getSetting('user') == 'connect') {
+            $email = $this->getRequest()->getSetting('email');
+            $pass = $this->getRequest()->getSetting('mdp');
+            
+            $user = new User();
+            $user->setEmail($email);
+            $user->setPass($pass);
+        
+            $validator = new UserValidator();                                   
+            $errors = $validator->validateConnecting($user);
+
+            if ($errors) {
+
+                $userAction = new UserRepository();    
+                $value = $userAction->checkForConnect2($user);
+
+                if(!empty($value)) {
+
+                    $getPass = $value['password']; 
+                  
+                    $verif = password_verify($pass, $getPass);
+                   
+                    if($verif == true) {
+                       
+                        $getData = $userAction->getUser($user);
+                     
+                        $_SESSION = array();
+                        $_SESSION['auth']['pseudo'] = $getData['pseudo'];
+                        $_SESSION['auth']['email'] = $getData['email'];
+                        $_SESSION['auth']['status'] = $getData['status'];
+                        $_SESSION['auth']['created_at'] = $getData['created_at'];
+                        $_SESSION['auth']['role'] = $getData['role'];
+                        $_SESSION['auth']['newsletter'] =$getData['newsletter'];
+
+                        if ($_SESSION['auth']['role'] == 30) {
+                            header('location: /admin/personnalSpaceAdmin');
+                        }
+                        header('location: /home/personnalSpace');
+                    }
+                }
+            }
+            $msgErrorValidator = $validator->getMsgerror();
+        }
+        $this->generateView([
+            'msgErrorValidator' => $msgErrorValidator
+        ]);
+    }
+
     public function register() {
 
         $errors = 0;
@@ -68,7 +121,7 @@ class Home extends Controller {
                 $mail->sendEmailForRegister($user);
                
                 $_SESSION['message']['class'] = "success";
-                $_SESSION['message']['content'] = "  <i class=\"fa fa-exclamation-circle\" aria-hidden=\"true\"></i> &nbsp &nbsp felicitation votre enregistrement est bien pris en compte il vous restera a comfirmer votre e-mail. &nbsp &nbsp <a class=\"continuer\" href=index.php>Continuer...</a> &nbsp &nbsp <i class=\"fa fa-exclamation-circle\" aria-hidden=\"true\"></i> ";
+                $_SESSION['message']['content'] = "<i class=\"fa fa-exclamation-circle\" aria-hidden=\"true\"></i> &nbsp &nbsp felicitation votre enregistrement est bien pris en compte il vous restera a comfirmer votre e-mail. &nbsp &nbsp <a class=\"continuer\" href=index.php>Continuer...</a> &nbsp &nbsp <i class=\"fa fa-exclamation-circle\" aria-hidden=\"true\"></i> ";
               
                 header('Location: http://blog/index.php');     
             }
@@ -85,12 +138,79 @@ class Home extends Controller {
         $this->generateView();
     }
 
+    public function personnalSpace() {
+        if ($_SESSION['auth']['role'] < 20) {
+            unset($_SESSION['auth']);
+            header('Location:/home/index');
+            exit();
+        }
+        $this->generateView();
+    }
 
     public function contact() {
         
         $this->generateView();
     }
     
+    public function deconnection() {
+        if ($this->getRequest()->getSetting('user') == 'deco') { 
+           
+            $_SESSION = array(); 
+            unset($_SESSION['auth']);
+            session_destroy();
+            header("location:/home/index"); //ok
+        }
+    }
+
+    public function updateProfil() {
+        if ($_SESSION['auth']['role'] < 20) {
+            header('Location:/home/index');
+            exit();
+        }
+
+        $errors = 0;
+        $msgErrorValidator = 0;
+        
+        if ($this->getRequest()->getSetting('user') == 'update') {
+            $pseudo = $this->getRequest()->getSetting('pseudo');
+            $email = $this->getRequest()->getSetting('email');
+            $pass = $this->getRequest()->getSetting('pass');
+            $pass2 = $this->getRequest()->getSetting('pass2');
+           
+            $user = new User();
+
+            $user->setPseudo($pseudo);
+            $user->setEmail($email);
+            $user->setPass($pass);
+            $user->setPass2($pass2);
+
+            $validator = new UserValidator();
+            $errors = $validator->updateRegister($user);
+
+            if ($errors) {
+                $pass = password_hash($pass, PASSWORD_BCRYPT);
+                $pass2 = null;
+
+                $user->setPass($pass);
+                $user->setPass2($pass2);
+                
+                $userAction = new UserRepository();    
+                $userAction->updateProfil($user);
+                
+                $getData = $userAction->getUser($user);
+                     
+                        $_SESSION['auth']['pseudo'] = $getData['pseudo'];
+                        $_SESSION['auth']['email'] = $getData['email'];
+                     
+                header('Location: http://blog/index.php');     
+            }
+            $msgErrorValidator = $validator->getMsgerror();
+        }
+
+        $this->generateView([
+            'msgErrorValidator' => $msgErrorValidator
+        ]);
+    }
 
     public function confirmation() {
 
