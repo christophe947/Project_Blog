@@ -4,10 +4,17 @@ variable = {
     spaceAdmin: document.querySelector("#personnalSpaceAdmin"),
     article: document.querySelector("#articleMenu"),
     acceuil: document.querySelector("#acceuilMenu"),
-    contact: document.querySelector("#contactMenu")
+    contact: document.querySelector("#contactMenu"),
+    linkGoogle: document.querySelector("#clickJsGoogle a") 
     //content: document.querySelector(".rowBis"),
     //title: document.querySelector("#bienvenue")
 };
+
+if ($("#clickJsGoogle").length > 0) {
+    $(function () { 
+        document.getElementById("clickJsGoogle").click();
+    });
+}
 
 function littleScroll() {
     window.scrollTo({
@@ -70,11 +77,6 @@ if ($("#spaceArticleAdmmin").length > 0) {
         variable.spaceAdmin.style.opacity = "0.6";
     });
 }
-
-
-
-
-
 
 $("#deco").click(function(){
     

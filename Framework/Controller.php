@@ -55,7 +55,7 @@ abstract class Controller
         $controllerView = substr(str_replace($controllerNamespace, "", $classeController), 1);
 
         $view = new View($actionView, $controllerView);
-        //gestion de la conditoin pour faire uneautre  $view->generateBIS($dataView);
+        //gestion de la conditoin pour faire une autre  $view->generateBIS($dataView);
         if(!empty($_SESSION['auth']['role']) == 30) {
             $view->generateAdmin($dataView);   
         } else {

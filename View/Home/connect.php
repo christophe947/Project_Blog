@@ -44,6 +44,13 @@
                }
            
        ?>
+
+<?php if (!empty($_SESSION['linkGoogle'])) : ?>
+            <p><?= $_SESSION['linkGoogle'] ?></p>
+        <?php
+            unset($_SESSION['linkGoogle']);
+            endif;
+        ?>
        </em>
         <!-- Sign in button -->
         <button class="btnvert btn btn-info btn-block my-4" type="submit" name="user" value="connect">Se connecter</button>
@@ -60,7 +67,7 @@
         <a href="#" class="mx-2" role="button"><i class="fab fa-twitter icon"></i></a>
         <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in icon"></i></a>
         <a href="#" class="mx-2" role="button"><i class="fab fa-github icon"></i></a>
-
+        <button class="btnvert btn my-4 bt-block" type="submit" name="user" value="connectGoogle">GOOGLE</button>
     </form>
 <!-- Default form login -->
 

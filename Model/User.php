@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Model;
-
+ 
 use App\Framework\Database;
 use App\Controller\Home;
 
@@ -12,6 +12,8 @@ class User extends Database {
     private $pseudo;
     private $pass;
     private $pass2;
+    private $pass3;  //pour modif mot de passe 3 
+    private $pass4;  //pour modif mot de passe 4
     private $email;
     private $statut;
     private $date;
@@ -43,6 +45,18 @@ class User extends Database {
     }
     public function setPass2($pass2) {
         $this->pass2 = $pass2;
+    }
+    public function getPass3() {            //////
+        return $this->pass3;
+    }
+    public function setPass3($pass3) {
+        $this->pass3 = $pass3;
+    }
+    public function getPass4() {
+        return $this->pass4;
+    }
+    public function setPass4($pass4) {          //////
+        $this->pass4 = $pass4;
     }
     public function getEmail() {
         return $this->email;

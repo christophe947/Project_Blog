@@ -10,8 +10,10 @@ class UserValidator extends Validator {
 
     const PSEUDO_LENGTH = 25;
     const EMAIL_LENGTH = 25;
-    const PASS_LENGTH = 25;
+    const PASS_LENGTH = 35;
+    const TITLE_LENGTH = 20;
     const EMAIL_VAR_ON = 1;
+    const VAR_ON = 1;
 
     private $error = 0;
     private $msgErrorValidator = [];
@@ -22,7 +24,6 @@ class UserValidator extends Validator {
         }
         return true;
     }
-
 
 
     public function validateRegister($user) {
@@ -42,24 +43,25 @@ class UserValidator extends Validator {
         return false;
     }
 
-    public function updateRegister($user) {
+    public function updateRegister($user) {  //fonction nom en doublon dans repossitory aussi
 
         $pseudo = $user->getPseudo();
         $email = $user->getEmail();
         $pass = $user->getPass();
-        $pass2 = $user->getPass2();
+        //$pass2 = $user->getPass2();
+        $pass3 = $user->getPass3();
+        $pass4 = $user->getPass4();
 
         $this->validatePseudo($pseudo, self::PSEUDO_LENGTH, null, $_SESSION['auth']['pseudo']);
         $this->validateEmail($email, self::EMAIL_LENGTH, null,  $_SESSION['auth']['email']);
-        $this->validatePass($pass, self::PASS_LENGTH, $pass2);
-        var_dump($_SESSION['auth']['pseudo']);
+        $this->validatePass($pass, self::PASS_LENGTH/*, $pass2*/);
+       if (!empty($pass3 /*|| $pass4*/)) { $this->validatePass($pass3, self::PASS_LENGTH, $pass4, self::VAR_ON); }
+        //var_dump($_SESSION['auth']['pseudo']);
         if ($this->error == 0) {
             return true;
         }
         return false;
     }
-
-
 
     public function validateConnecting($user) {
 
@@ -74,7 +76,6 @@ class UserValidator extends Validator {
         }
         return false;
     }
-
 
 
     public function validatePseudo($value, $value1, $value2 = null, $value3 = null) {                       //PSEUDO
@@ -127,7 +128,7 @@ class UserValidator extends Validator {
     }
 
 
-    public function validatePass($value, $value1, $value2 = null) {                   //PASS
+    public function validatePass($value, $value1, $value2 = null, $value3 = null) {                   //PASS
         if ($this->validateIsNotEmpty($value)){
             $this->error++;
             $this->msgErrorValidator['pass'] = "* mdp requis";
@@ -138,8 +139,16 @@ class UserValidator extends Validator {
         }
         if ($value2 != null) {
             if($this->validateIsNotDifferent($value , $value2)){
-                $this->error++;
-                $this->msgErrorValidator['pass'] = "* les mdp doive etre pareil";
+                if($value3 != null){
+                    $this->error++;
+                    $this->msgErrorValidator['passBis'] = "* les nouveau mdp doivent etre identiques";
+                } else if ($value3 = null){
+                    $this->error++;
+                    $this->msgErrorValidator['pass'] = "* les mdp doivent etre identiques Bis";
+                }
+
+
+                //}
             }
         }
     }

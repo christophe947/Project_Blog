@@ -18,8 +18,8 @@
 
       
         <!-- First-Name -->
-                <input type="text" id="defaultRegisterFormFirstName" name="pseudo" value='<?= $_SESSION['auth']['pseudo'] ?>' class="form-control mb-4">
-
+                <input type="text" id="defaultRegisterFormFirstName" name="pseudo" value='<?= !empty($_POST['pseudo']) ? $_POST['pseudo'] :  $_SESSION['auth']['pseudo'] ?>' class="form-control mb-4 testt <?= (empty($msgErrorValidator['pseudo']) && !empty($_POST['pseudo']) ) ? 'colorBack' : 'none' ?> <?= (!empty($msgErrorValidator['pseudo'])) ? 'colorBackRed' : 'none' ?>" placeholder="Pseudo" <?php if(!empty($msgErrorValidator['pseudo']) || empty($_POST['pseudo'])) {?> autofocus <?php } ?>>
+                <p class="<?= !empty($msgErrorValidator['pseudo']) ? 'dblock' : 'dnone' ?>"><?= !empty($msgErrorValidator['pseudo']) ? $msgErrorValidator['pseudo'] : '' ?></p>
                 
             
 
@@ -31,22 +31,34 @@
         <!-- E-mail -->
         
         
-            <input type="email" id="defaultRegisterFormEmail" name="email" value='<?= $_SESSION['auth']['email'] ?>' class="form-control mb-4">
-
+            <input type="email" id="defaultRegisterFormEmail" name="email" value='<?= !empty($_POST['email']) ? $_POST['email'] : $_SESSION['auth']['email'] ?>' class="form-control mb-4 testt <?= (empty($msgErrorValidator['email']) && !empty($_POST['email']) ) ? 'colorBack' : 'none' ?> <?= (!empty($msgErrorValidator['email'])) ? 'colorBackRed' : 'none' ?>" placeholder="E-mail" <?php if(!empty($msgErrorValidator['email']) || empty($_POST['email'])) {?> autofocus <?php } ?>>
+            <p class="<?= !empty($msgErrorValidator['email']) ? 'dblock' : 'dnone' ?>"><?= !empty($msgErrorValidator['email']) ? $msgErrorValidator['email'] : '' ?></p>
            
          
         <br>
         <!-- Password -->
         
-        <input type="password" id="defaultRegisterFormPassword" name="pass" value='' class="form-control mb-4 testt" placeholder='Mot de passe qui sera uilisé' aria-describedby="defaultRegisterFormPasswordHelpBlock" >
-
+        <input type="password" id="defaultRegisterFormPassword" name="pass" value='' class="form-control mb-4 testt" placeholder="Tapez votre mot de passe" aria-describedby="defaultRegisterFormPasswordHelpBlock" >
+        <p class="<?= !empty($msgErrorValidator['pass']) ? 'dblock' : 'dnone' ?>"><?= !empty($msgErrorValidator['pass']) ? $msgErrorValidator['pass'] : '' ?></p>
         
 
-        <input type="password" id="defaultRegisterFormPassword" name="pass2" value='' class="form-control mb-4 testt" placeholder="Confirmer votre mot de passe" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+        <!--<input type="password" id="defaultRegisterFormPassword" name="pass2" value='' class="form-control mb-4 testt" placeholder="Confirmer votre mot de passe" aria-describedby="defaultRegisterFormPasswordHelpBlock">-->
         
         <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-            Si vous desirez conservez certaine de vos informations il vous suffit de les réecrires 
+            Obligatoire.
         </small>
+        <br/>
+
+
+        <input type="password" id="defaultRegisterFormPassword" name="pass3" value='' class="form-control mb-4 testt" placeholder="Nouveau mot de passe (facultatif)" aria-describedby="defaultRegisterFormPasswordHelpBlock" >
+        <p class="<?= !empty($msgErrorValidator['passBis']) ? 'dblock' : 'dnone' ?>"><?= !empty($msgErrorValidator['passBis']) ? $msgErrorValidator['passBis'] : '' ?></p>
+        
+        
+
+        <input type="password" id="defaultRegisterFormPassword" name="pass4" value='' class="form-control mb-4 testt" placeholder="Confirmer le nouveau mot de passe (facultatif)" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+       
+        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+            Facultatif, à remplir si vous souhaitez modifier votre mot de passe actuel par un nouveau.
         <br/>
         
        

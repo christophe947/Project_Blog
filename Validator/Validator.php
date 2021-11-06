@@ -28,6 +28,7 @@ class Validator {
         return false;
     }
 
+    
     public function existingPseudoEmail($value) {
         $init = new UserRepository;
         $data = $init->isUseInBddPseudoEmail($value);

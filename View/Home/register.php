@@ -65,6 +65,18 @@
                 }}
             ?> 
         </em>
+        <?php 
+        //var_dump($_SESSION['linkGoogle']);
+        //if(isset($_SESSION['linkGoogle'])) { echo $_SESSION['linkGoogle'];
+        //} ?>
+        <?php if (!empty($_SESSION['linkGoogle'])) : ?>
+            <p><?= $_SESSION['linkGoogle'] ?></p>
+        <?php
+            unset($_SESSION['linkGoogle']);
+            endif;
+        ?>
+
+       
 
         <!--<br>-->
         <!-- Newsletter -->
@@ -87,7 +99,8 @@
         <a href="#" class="mx-2" role="button"><i class="fab fa-twitter icon"></i></a>
         <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in icon"></i></a>
         <a href="#" class="mx-2" role="button"><i class="fab fa-github icon"></i></a>
-
+        <a href='" . $client->createAuthUrl() . "'>Login Google</a>
+        <!--<a href="<?php //if(isset($_SESSION['linkGoogle'])) { echo $_SESSION['linkGoogle']; } ?>">--><button class="btnvert btn my-4 bt-block" type="submit" name="user" value="registerGoogle">GOOGLE</button><!--</a>-->
         <hr>
 
         <!-- Terms of service -->

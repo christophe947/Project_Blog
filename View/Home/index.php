@@ -1,6 +1,9 @@
 <?php $this->title = "Accueil"; ?>
 
 
+
+
+
 <div id="flashMessage" class="container-fluid no-gutter">
   
     <?php if (!empty($_SESSION['message'])) : ?>

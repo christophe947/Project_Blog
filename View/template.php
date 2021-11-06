@@ -41,7 +41,7 @@
                           <a class="nav-link text-white dropdown-toggle" id="monEspaceMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Mon Espace <span class="sr-only">(current)</span></a>
                           <div class="dropdown-menu bg-light " aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item <?= !empty($_SESSION['auth']) ? 'disabled' : '' ?>" href="home/register/">Inscription</a>
-                                <a class="dropdown-item <?= !empty($_SESSION['auth']) ? 'disabled' : '' ?>" href="home/connect/">Connection</a>
+                                <a class="dropdown-item <?= !empty($_SESSION['auth']) ? 'disabled' : '' ?>" href="home/connect/">Connexion</a>
                                    
                             </div>
                           
@@ -126,7 +126,7 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="home/index/">- Acceuil</a>
+            <a href="home/index/">- Accueil</a>
           </li>
           <li>
             <a href="home/article/">- Article</a>

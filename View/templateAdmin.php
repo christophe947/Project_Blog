@@ -170,7 +170,7 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="home/index/">- Acceuil</a>
+            <a href="home/index/">- Accueil</a>
           </li>
           <li>
             <a href="home/article/">- Article</a>
